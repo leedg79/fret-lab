@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d1119">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FRET LAB">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icon.svg">
+<link rel="stylesheet" href="./styles.css">
+<title>FRET LAB — Guitar Practice System</title>
+</head>
+<body>
+<header class="topbar">
+  <button class="brand" id="homeBrand" type="button" aria-label="홈으로">
+    <span>FRET</span> LAB <small>GUITAR PRACTICE SYSTEM</small>
+  </button>
+  <div class="top-status" id="netStatus"><i></i> READY</div>
+</header>
+
+<main id="app">
+  <section id="home" class="screen active">
+    <div class="hero">
+      <div class="eyebrow">GUITAR FRETBOARD · HARMONY · PRACTICE</div>
+      <h1>Play the fretboard.<br><em>Understand harmony.</em></h1>
+      <p>지판의 음부터 코드 보이싱과 장르별 진행까지, 직접 연주하며 익히는 기타 훈련 시스템.</p>
+    </div>
+    <div class="module-grid">
+      <button class="module-card" type="button" data-open="note">
+        <span class="num">01</span><strong>Note Finder</strong><small>지판 음 위치 찾기</small><b>↗</b>
+      </button>
+      <button class="module-card" type="button" data-open="triad">
+        <span class="num">02</span><strong>Triad Trainer</strong><small>트라이어드 · 전위 · 코드 사전</small><b>↗</b>
+      </button>
+      <button class="module-card" type="button" data-open="shell">
+        <span class="num">03</span><strong>Shell Voicing</strong><small>7th 코드 · 텐션 · 보이싱</small><b>↗</b>
+      </button>
+      <button class="module-card featured" type="button" data-open="progression">
+        <span class="num">04</span><strong>Progression Lab</strong><small>실시간 진행 연주 · 코드표 저장</small><b>↗</b>
+      </button>
+    </div>
+    <div class="notice">
+      <span>●</span> 오프라인 캐싱이 지원됩니다. 한 번 접속한 뒤에는 인터넷 연결 없이도 홈 화면에서 바로 실행할 수 있습니다.
+    </div>
+  </section>
+
+  <section id="module" class="screen">
+    <button class="back" id="backHome" type="button">← 홈</button>
+    <div class="section-head">
+      <div class="eyebrow" id="moduleEyebrow">MODULE 01</div>
+      <h2 id="moduleTitle">Note Finder</h2>
+      <p id="moduleDesc"></p>
+    </div>
+    <div id="toolChoices" class="tool-grid"></div>
+  </section>
+
+  <section id="settings" class="screen">
+    <button class="back" id="backModule" type="button">← 도구 선택</button>
+    <div class="section-head">
+      <div class="eyebrow" id="toolEyebrow">SETUP</div>
+      <h2 id="toolTitle">설정</h2>
+      <p id="toolDesc"></p>
+    </div>
+    <div id="settingsFields" class="settings-card"></div>
+    <button id="startBtn" class="primary wide" type="button">시작하기 <span>→</span></button>
+  </section>
+
+  <section id="session" class="screen">
+    <div class="session-top">
+      <button class="back" id="exitSession" type="button">← 설정</button>
+      <div class="session-module" id="sessionModule">NOTE FINDER</div>
+      <button class="quiet" id="restartSession" type="button" title="다시 시작">↻</button>
+    </div>
+    <div class="session-content">
+      <div class="session-meta">
+        <span id="progressLabel">PROMPT 1</span>
+        <span id="tempoLabel">5 SEC</span>
+      </div>
+      <div id="promptCard" class="prompt-card">
+        <div class="prompt-caption" id="promptCaption">FIND THIS NOTE</div>
+        <div class="prompt-main" id="promptMain">C</div>
+        <div class="prompt-sub" id="promptSub">ALL STRINGS</div>
+      </div>
+      <div id="chordInfo" class="chord-info"></div>
+      <div id="answerArea" class="answer-area hidden"></div>
+      <div id="flowArea" class="flow-area hidden"></div>
+      <div class="session-controls">
+        <button id="pauseBtn" class="secondary" type="button">Ⅱ 일시정지</button>
+        <button id="answerBtn" class="primary" type="button">정답 확인</button>
+        <button id="nextBtn" class="primary hidden" type="button">다음 문제 →</button>
+      </div>
+      <div class="live-settings" id="liveSettings"></div>
+      <div class="timer-wrap" id="timerWrap">
+        <div class="timer-track"><div id="timerBar"></div></div>
+        <div id="timerText">5.0</div>
+      </div>
+      <div class="metronome-row" id="metronomeRow">
+        <span>METRONOME</span>
+        <button id="metroToggle" class="toggle" type="button">OFF</button>
+        <div class="tempo-adjust">
+          <button id="tempoDown" type="button">−</button>
+          <b id="tempoValue">90</b>
+          <button id="tempoUp" type="button">+</button>
+          <span>BPM</span>
+        </div>
+      </div>
+      <div class="field inline-time hidden" id="inlineTime">
+        <label for="timeAdjust">제한시간 <b id="timeAdjustOut">5초</b></label>
+        <input id="timeAdjust" type="range" min="1" max="15" value="5">
+      </div>
+    </div>
+    <div class="session-footer" id="sessionFooter">직접 기타로 연주한 뒤 정답을 확인하세요.</div>
+  </section>
+
+  <section id="dictionary" class="screen">
+    <button class="back" id="exitDictionary" type="button">← 도구 선택</button>
+    <div class="section-head">
+      <div class="eyebrow" id="dictEyebrow">REFERENCE</div>
+      <h2 id="dictTitle">Chord Dictionary</h2>
+      <p>코드와 운지 조건을 선택하면 기타 지판에서 가능한 형태를 찾아 보여줍니다.</p>
+    </div>
+    <div id="dictFields" class="settings-card"></div>
+    <button id="searchDict" class="primary wide" type="button">운지 형태 검색</button>
+    <div id="dictResults" class="dict-results"></div>
+  </section>
+
+  <section id="result" class="screen">
+    <button class="back" id="resultHome" type="button">← 홈</button>
+    <div class="section-head">
+      <div class="eyebrow">SESSION COMPLETE</div>
+      <h2>연습 세션 완료</h2>
+      <p>이번 세션에서 사용한 코드 진행과 보이싱을 코드표로 정리했습니다.</p>
+    </div>
+    <div class="result-meta" id="resultMeta"></div>
+    <div id="resultSheet" class="result-sheet"></div>
+    <div class="export-row">
+      <button id="savePng" class="primary" type="button">PNG 이미지 저장</button>
+      <button id="printSheet" class="secondary" type="button">인쇄 / PDF 저장</button>
+    </div>
+    <button id="repeatSession" class="secondary wide" type="button">같은 설정으로 다시 연습</button>
+  </section>
+</main>
+
+<footer>FRET LAB <span>·</span> OFFLINE PWA READY</footer>
+<script src="./app.js"></script>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js").catch(() => {});
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "FRET LAB — Guitar Practice System",
+  "short_name": "FRET LAB",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d1119",
+  "theme_color": "#0d1119",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
